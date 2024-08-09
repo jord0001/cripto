@@ -37,9 +37,12 @@ def decrypt_file(encrypted_file_name: str, password: str):
         file.write(plaintext)
 
 
-password = os.environ.get('PASSWORD')  
+password_file_name = os.environ.get('PASSWORD_FILE_NAME')  
 file_name = os.environ.get('FILE_NAME') 
 
+with open(password_file_name, 'r') as file:
+    password = file.read().strip()
+    
 if os.environ.get('ENCRIPTY').upper().startswith('Y'):
     encrypt_file(file_name, password)
     print(f'Arquivo {file_name} criptografado com sucesso.')
